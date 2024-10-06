@@ -4,3 +4,15 @@ function New-PowerPoint {
 
     return $app
 }
+
+function Exit-PowerPoint {
+    param (
+        $app
+    )
+    # $app.Quit()
+
+    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($app) | Out-Null
+    $app = $null
+    # Remove-Variable -Name Application -ErrorAction SilentlyContinue
+    [System.GC]::Collect()
+}
