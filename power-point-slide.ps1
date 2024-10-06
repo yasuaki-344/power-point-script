@@ -16,3 +16,11 @@ function Exit-PowerPoint {
     # Remove-Variable -Name Application -ErrorAction SilentlyContinue
     [System.GC]::Collect()
 }
+
+function Add-Presentaion {
+    param (
+        $app
+    )
+    $presentation = $Application.Presentations.Add()
+    return $presentation
+}
