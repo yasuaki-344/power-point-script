@@ -24,3 +24,7 @@ function Add-Presentaion {
     $presentation = $Application.Presentations.Add()
     return $presentation
 }
+
+$Application = New-PowerPoint
+$presentation = Add-Presentaion($Application)
+Exit-PowerPoint($Application)
