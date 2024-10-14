@@ -47,7 +47,7 @@ function Import-TitlesAndMessagesFromCSV {
             Select-Object -Skip 1 |
             Select-Object -First 1
 
-        if ($bodyPlaceholder) {
+            if ($bodyPlaceholder) {
             $bodyPlaceholder.TextFrame.TextRange.Text = $row.KeyMessages
         }
     }
@@ -63,6 +63,3 @@ function Import-TitlesAndMessagesFromCSV {
     [System.GC]::Collect()
     [System.GC]::WaitForPendingFinalizers()
 }
-
-# Example usage
-Import-TitlesAndMessagesFromCSV -csvPath "D:\dev\power-point-script\examples\Import-TitlesAndMessagesFromCSV\input.csv" -pptTemplatePath "D:\dev\power-point-script\examples\Import-TitlesAndMessagesFromCSV\template.pptx" -customLayoutName "title-and-key-message" -outputPptPath "D:\dev\power-point-script\examples\Import-TitlesAndMessagesFromCSV\result.pptx"
