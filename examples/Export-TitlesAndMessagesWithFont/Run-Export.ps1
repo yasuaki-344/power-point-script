@@ -1,5 +1,5 @@
 # Import the function from the external script
-. .\..\..\scripts\Export-PowerPointTitlesAndMessages.ps1
+. .\..\..\scripts\Export-TitlesAndMessagesWithFont.ps1
 
 # Get the current script directory
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
@@ -9,4 +9,4 @@ $pptPath = "$scriptDir\presentation.pptx"
 $csvPath = "$scriptDir\output.csv"
 
 # Call the function with the specified paths
-Export-PowerPointTitlesAndMessages -pptPath $pptPath -csvPath $csvPath
+Export-TitlesAndMessagesWithFont -pptPath $pptPath -csvPath $csvPath
