@@ -7,9 +7,8 @@ function Export-PowerPointTitlesAndMessages {
 
     # Load PowerPoint application
     $app = New-Object -ComObject PowerPoint.Application
-    $app.WindowState = [Microsoft.Office.Interop.PowerPoint.PpWindowState]::ppWindowMinimized
-
     # $app.Visible = [Microsoft.Office.Core.MsoTriState]::msoFalse
+    $app.WindowState = [Microsoft.Office.Interop.PowerPoint.PpWindowState]::ppWindowMinimized
 
     # Open the PowerPoint file
     $presentation = $app.Presentations.Open(
