@@ -1,6 +1,6 @@
 # PowerShell script to insert titles and key messages to the specified PowerPoint presentation
 
-function Insert-TitlesAndMessagesIntoPPT {
+function Import-TitlesAndMessagesFromCSV {
     param (
         [string]$csvPath,
         [string]$pptTemplatePath,
@@ -21,9 +21,10 @@ function Insert-TitlesAndMessagesIntoPPT {
     )
 
     # Get the slide master and custom layout
-    $slideMaster = $presentation.Designs[1].SlideMaster
+    $slideMaster = $presentation.SlideMaster
     $customLayout = $slideMaster.CustomLayouts | Where-Object { $_.Name -eq $customLayoutName }
     if (-not $customLayout) {
+
         throw "Custom layout '$customLayoutName' not found."
     }
 
@@ -34,6 +35,21 @@ function Insert-TitlesAndMessagesIntoPPT {
     foreach ($row in $data) {
         # Add a new slide with specified custom layout
         $slide = $presentation.Slides.AddSlide($presentation.Slides.Count + 1, $customLayout)
+
+        # Insert the title into the title placeholder
+        $titlePlaceholder = $slide.Shapes.Placeholders | Select-Object -First 1
+        if ($titlePlaceholder) {
+            $titlePlaceholder.TextFrame.TextRange.Text = $row.Title
+        }
+
+        # Insert the key messages into the body placeholder
+        $bodyPlaceholder = $slide.Shapes.Placeholders |
+            Select-Object -Skip 1 |
+            Select-Object -First 1
+
+        if ($bodyPlaceholder) {
+            $bodyPlaceholder.TextFrame.TextRange.Text = $row.KeyMessages
+        }
     }
 
     # Save the new presentation
@@ -49,4 +65,4 @@ function Insert-TitlesAndMessagesIntoPPT {
 }
 
 # Example usage
-Insert-TitlesAndMessagesIntoPPT -csvPath "D:\dev\power-point-script\examples\Insert-ContentToPowerPoint\input.csv" -pptTemplatePath "D:\dev\power-point-script\examples\Insert-ContentToPowerPoint\template.pptx" -customLayoutName "title-and-key-message" -outputPptPath "D:\dev\power-point-script\examples\Insert-ContentToPowerPoint\result.pptx"
+Import-TitlesAndMessagesFromCSV -csvPath "D:\dev\power-point-script\examples\Import-TitlesAndMessagesFromCSV\input.csv" -pptTemplatePath "D:\dev\power-point-script\examples\Import-TitlesAndMessagesFromCSV\template.pptx" -customLayoutName "title-and-key-message" -outputPptPath "D:\dev\power-point-script\examples\Import-TitlesAndMessagesFromCSV\result.pptx"
