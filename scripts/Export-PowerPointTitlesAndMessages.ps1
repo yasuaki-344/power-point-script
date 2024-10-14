@@ -56,6 +56,3 @@ function Export-PowerPointTitlesAndMessages {
     [System.GC]::Collect()
     [System.GC]::WaitForPendingFinalizers()
 }
-
-# Example usage
-Export-PowerPointTitlesAndMessages -pptPath "D:\dev\power-point-script\scripts\プレゼンテーション1.pptx" -csvPath "output.csv"

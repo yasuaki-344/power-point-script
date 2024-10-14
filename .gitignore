@@ -28,3 +28,7 @@
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,powershell
+
+*.csv
+*.pptx
+!examples/Export-PowerPointTitlesAndMessages/presentation.pptx
