@@ -80,6 +80,3 @@ function Export-TitlesAndMessagesWithFont {
     [System.GC]::Collect()
     [System.GC]::WaitForPendingFinalizers()
 }
-
-# Example usage
-Export-TitlesAndMessagesWithFont -pptPath "D:\dev\power-point-script\scripts\presentation.pptx" -csvPath ".\output.csv"
