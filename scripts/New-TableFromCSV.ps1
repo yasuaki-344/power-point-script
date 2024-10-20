@@ -26,7 +26,7 @@ function New-TableFromCSV {
 
     # Define table dimensions
     $rows = $data.Count + 1 # Include header row
-    $columns = $data[0].PSObject.Properties.Count
+    $columns = ($data[0].PSObject.Properties | Measure-Object).Count
 
     # Insert a table into the slide
     $table = $slide.Shapes.AddTable($rows, $columns).Table
@@ -41,7 +41,7 @@ function New-TableFromCSV {
     for ($row = 2; $row -le $rows; $row++) {
         $rowData = $data[$row - 2].PSObject.Properties | ForEach-Object { $_.Value }
         for ($col = 1; $col -le $columns; $col++) {
-            $table.Cell($row, $col).Shape.TextFrame.TextRange.Text = $rowData[$col - 1]
+            $table.Cell($row, $col).Shape.TextFrame.TextRange.Text = [string]$rowData[$col - 1]
         }
     }
 

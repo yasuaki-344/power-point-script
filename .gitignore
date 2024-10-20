@@ -31,8 +31,10 @@
 
 *.csv
 !examples/Import-TitlesAndMessagesFromCSV/input.csv
+!examples/New-TableFromCSV/table.csv
 
 *.pptx
 !examples/Export-PowerPointTitlesAndMessages/presentation.pptx
 !examples/Export-TitlesAndMessagesWithFont/presentation.pptx
 !examples/Import-TitlesAndMessagesFromCSV/template.pptx
+!examples/New-TableFromCSV/template.pptx
