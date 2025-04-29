@@ -30,11 +30,19 @@ Sub InsertMatrixVisual()
 End Sub
 
 Private Sub AddTitleWithLine(slide As slide, startX As Single, startY As Single, drawWidth As Single, titleHeight As Single)
-    Dim shape As shape
     ' タイトル用の矩形を追加
-    Set shape = slide.Shapes.AddShape(msoShapeRectangle, startX, startY, drawWidth, titleHeight)
+    With slide.Shapes.AddShape(msoShapeRectangle, startX, startY, drawWidth, titleHeight)
+        .Fill.ForeColor.RGB = RGB(255, 255, 255)
+        .TextFrame.TextRange.Font.Color.RGB = RGB(0, 0, 0)
+        .TextFrame.TextRange.Text = "Matrix Visual"
+        .TextFrame.TextRange.ParagraphFormat.Alignment = ppAlignCenter
+        .Line.Visible = msoFalse
+    End With
     ' タイトルの下に線を追加
-    Set shape = slide.Shapes.AddLine(startX, startY + titleHeight, startX + drawWidth, startY + titleHeight)
+    With slide.Shapes.AddLine(startX, startY + titleHeight, startX + drawWidth, startY + titleHeight)
+        .Line.Weight = 2.25
+        .Line.ForeColor.RGB = RGB(118, 113, 113)
+    End With
 End Sub
 
 Private Sub AddMatrixElements(slide As slide, startX As Single, startY As Single, shapeWidth As Single, shapeHeight As Single, spacing As Single, rowCount As Integer, colCount As Integer)
