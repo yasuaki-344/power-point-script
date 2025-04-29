@@ -12,4 +12,10 @@ Sub InsertMatrixVisual()
     ' Get the current slide
     Dim slide As slide: Set slide = ActivePresentation.Slides(1)
 
+    Dim shape As shape
+    ' Add title object
+    Const titleHeight As Single = 1 * cm2pt
+    Set shape = slide.Shapes.AddShape(msoShapeRectangle, startX, startY, drawWidth, titleHeight)
+    Set shape = slide.Shapes.AddLine(startX, startY + titleHeight, startX + drawWidth, startY + titleHeight)
+
 End Sub
