@@ -15,8 +15,7 @@ Sub InsertMatrixVisual()
     Dim shape As shape
     ' Add title object
     Const titleHeight As Single = 1 * cm2pt
-    Set shape = slide.Shapes.AddShape(msoShapeRectangle, startX, startY, drawWidth, titleHeight)
-    Set shape = slide.Shapes.AddLine(startX, startY + titleHeight, startX + drawWidth, startY + titleHeight)
+    Call AddTitleWithLine(slide, startX, startY, drawWidth, titleHeight)
 
     ' Add matrix elements
     Const rowCount As Integer = 3
@@ -27,9 +26,23 @@ Sub InsertMatrixVisual()
     Const shapeHeight As Single = (matrixHeight - (rowCount - 1) * spacing) / rowCount
 
     Const startMatrixY As Single = startY + titleHeight + spacing
-    Dim row As Integer: For row = 0 To rowCount - 1
-        Dim col As Integer: For col = 0 To colCount - 1
-            Set shape = slide.Shapes.AddShape(msoShapeRectangle, startX + (shapeWidth + spacing) * col, startMatrixY + (shapeHeight + spacing) * row, shapeWidth, shapeHeight)
+    Call AddMatrixElements(slide, startX, startMatrixY, shapeWidth, shapeHeight, spacing, rowCount, colCount)
+End Sub
+
+Private Sub AddTitleWithLine(slide As slide, startX As Single, startY As Single, drawWidth As Single, titleHeight As Single)
+    Dim shape As shape
+    ' タイトル用の矩形を追加
+    Set shape = slide.Shapes.AddShape(msoShapeRectangle, startX, startY, drawWidth, titleHeight)
+    ' タイトルの下に線を追加
+    Set shape = slide.Shapes.AddLine(startX, startY + titleHeight, startX + drawWidth, startY + titleHeight)
+End Sub
+
+Private Sub AddMatrixElements(slide As slide, startX As Single, startY As Single, shapeWidth As Single, shapeHeight As Single, spacing As Single, rowCount As Integer, colCount As Integer)
+    Dim row As Integer, col As Integer
+    Dim shape As shape
+    For row = 0 To rowCount - 1
+        For col = 0 To colCount - 1
+            Set shape = slide.Shapes.AddShape(msoShapeRectangle, startX + (shapeWidth + spacing) * col, startY + (shapeHeight + spacing) * row, shapeWidth, shapeHeight)
         Next col
     Next row
 End Sub
