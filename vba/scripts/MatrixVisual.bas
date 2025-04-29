@@ -18,4 +18,12 @@ Sub InsertMatrixVisual()
     Set shape = slide.Shapes.AddShape(msoShapeRectangle, startX, startY, drawWidth, titleHeight)
     Set shape = slide.Shapes.AddLine(startX, startY + titleHeight, startX + drawWidth, startY + titleHeight)
 
+    ' Add matrix elements
+    Const rowCount As Integer = 3
+    Const colCount As Integer = 3
+
+    Const matrixHeight As Single = drawHeight - spacing - titleHeight
+    Const shapeWidth  As Single = (drawWidth - (colCount - 1) * spacing) / colCount
+    Const shapeHeight As Single = (matrixHeight - (rowCount - 1) * spacing) / rowCount
+
 End Sub
