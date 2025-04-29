@@ -12,7 +12,6 @@ Sub InsertMatrixVisual()
     ' Get the current slide
     Dim slide As slide: Set slide = ActivePresentation.Slides(1)
 
-    Dim shape As shape
     ' Add title object
     Const titleHeight As Single = 1 * cm2pt
     Call AddTitleWithLine(slide, startX, startY, drawWidth, titleHeight)
@@ -23,7 +22,7 @@ Sub InsertMatrixVisual()
 
     Const matrixHeight As Single = drawHeight - spacing - titleHeight
     Const shapeWidth  As Single = (drawWidth - colCount * spacing) / (colCount + 1)
-    Const shapeHeight As Single = (matrixHeight - rowCount * spacing) / (colCount + 1)
+    Const shapeHeight As Single = (matrixHeight - rowCount * spacing) / (rowCount + 1)
     Const startMatrixY As Single = startY + titleHeight + spacing
     Call AddMatrixElements(slide, startX, startMatrixY, shapeWidth, shapeHeight, spacing, rowCount, colCount)
 End Sub
@@ -45,10 +44,8 @@ Private Sub AddTitleWithLine(slide As slide, startX As Single, startY As Single,
 End Sub
 
 Private Sub AddMatrixElements(slide As slide, startX As Single, startY As Single, shapeWidth As Single, shapeHeight As Single, spacing As Single, rowCount As Integer, colCount As Integer)
-    Dim row As Integer, col As Integer
-    Dim shape As shape
-    For row = 0 To rowCount
-        For col = 0 To colCount
+    Dim row As Integer: For row = 0 To rowCount
+        Dim col As Integer: For col = 0 To colCount
             If row = 0 And col = 0 Then
                 ' Do nothing
             ElseIf row = 0 Or col = 0 Then
