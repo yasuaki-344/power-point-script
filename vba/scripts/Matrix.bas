@@ -1,4 +1,4 @@
-Sub InsertMatrixVisual()
+Sub InsertMatrix()
     ' This subroutine inserts a matrix visual into the active sheet.
 
     ' Parameters for the matrix visual
