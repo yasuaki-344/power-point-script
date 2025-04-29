@@ -9,4 +9,7 @@ Sub InsertMatrixVisual()
     Const drawHeight As Single = 12.7 * cm2pt
     Const spacing As Single = 10
 
+    ' Get the current slide
+    Dim slide As slide: Set slide = ActivePresentation.Slides(1)
+
 End Sub
