@@ -14,23 +14,16 @@ Sub InsertEnumeration()
 
     ' Add matrix elements
     Const rowCount As Integer = 5
-    Const colCount As Integer = 5
-
-    Const matrixHeight As Single = drawHeight - spacing - titleHeight
-    Const shapeWidth  As Single = (drawWidth - colCount * spacing) / (colCount + 1)
-    Const shapeHeight As Single = (matrixHeight - rowCount * spacing) / (rowCount + 1)
-    Const startMatrixY As Single = startY + titleHeight + spacing
-    Call AddMatrixElements(slide, startX, startMatrixY, shapeWidth, shapeHeight, spacing, rowCount, colCount)
+    Call AddMatrixElements(slide, startX, startY, drawWidth, drawHeight, spacing, rowCount)
 End Sub
 
-Private Sub AddMatrixElements(slide As slide, startX As Single, startY As Single, shapeWidth As Single, shapeHeight As Single, spacing As Single, rowCount As Integer, colCount As Integer)
-    Dim row As Integer, col As Integer
-    Dim shape As shape
-    For row = 0 To rowCount
-        For col = 0 To colCount
-            If row = 0 And col = 0 Then
-                ' Do nothing
-            ElseIf row = 0 Or col = 0 Then
+Private Sub AddMatrixElements(slide As slide, startX As Single, startY As Single, drawWidth As Single, drawHeight As Single, spacing As Single, rowCount As Integer)
+    Dim shapeWidth As Single: shapeWidth = (drawWidth - spacing) / 2
+    Dim shapeHeight As Single: shapeHeight = (drawHeight - (rowCount - 1) * spacing) / rowCount
+
+    Dim row As Integer: For row = 0 To rowCount - 1
+        Dim col As Integer: For col = 0 To 1
+            If col = 0 Then
                 With slide.Shapes.AddShape(msoShapeRectangle, startX + (shapeWidth + spacing) * col, startY + (shapeHeight + spacing) * row, shapeWidth, shapeHeight)
                     .TextFrame.TextRange.Font.Size = 16
                 End With
