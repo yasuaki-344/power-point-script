@@ -10,7 +10,7 @@ Sub InsertComparison()
 
     ' Parameters for the matrix visual
     Const cm2pt As Single = 28.35
-    Const spacing As Single = 10
+    Const spacing As Single = 15
     Dim params As DrawArea
     With params
         .startX = 0.9 * cm2pt
@@ -26,8 +26,10 @@ Sub InsertComparison()
     Call AddComparisonElements(slide, params, spacing)
 End Sub
 
+
 Private Sub AddComparisonElements(slide As slide, ByRef params As DrawArea, spacing As Single)
-    Const arrowWidth As Single = 4 * 28.35
+    Const arrowWidth As Single = 2 * 28.35
+    Const arrowHeight As Single = 9 * 28.35
     Const titleHeight As Single = 1.2 * 28.35
 
     Dim shapeWidth As Single: shapeWidth = (params.drawWidth - 2 * spacing - arrowWidth) / 2
@@ -45,9 +47,10 @@ Private Sub AddComparisonElements(slide As slide, ByRef params As DrawArea, spac
 
     ' arrow object
     Dim arrowPositionX As Single: arrowPositionX = params.startX + shapeWidth + spacing
-
-    With slide.Shapes.AddShape(msoShapeRightArrow, arrowPositionX, params.startY, arrowWidth, params.drawHeight)
-
+    Dim arrowStartY As Single: arrowStartY = params.startY + (params.drawHeight - arrowHeight) / 2
+    With slide.Shapes.AddShape(msoShapeRightArrow, arrowPositionX, arrowStartY, arrowWidth, arrowHeight)
+        .Adjustments.Item(2) = 1#
+        .Line.Visible = msoFalse
     End With
 
     ' after objects
