@@ -22,4 +22,10 @@ Sub InsertComparison()
     ' Get the current slide
     Dim slide As slide: Set slide = ActivePresentation.Slides(1)
 
+    ' Add title object
+    Call AddComparisonElements(slide, params, spacing)
+End Sub
+
+Private Sub AddComparisonElements(slide As slide, ByRef params As DrawArea, spacing As Single)
+
 End Sub
